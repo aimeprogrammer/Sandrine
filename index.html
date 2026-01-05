@@ -1153,7 +1153,7 @@
     </audio>
 
     <!-- Audio Player for VITAA & SLIMANE -->
-    <audio id="audioPlayer" src="music/piano-vitaa-slimane.mp3"></audio>
+    <audio id="audioPlayer" src="music/piano-vitaa-slimane.mp3" autoplay muted loop></audio>
     
     <!-- Music Controls -->
     <div class="music-controls">
@@ -1534,12 +1534,12 @@ function fadeIn(){
             const muteBtn = document.getElementById('muteBtn');
             const songSelect = document.getElementById('songSelect');
             
-            // Autoplay the music when page loads (some browsers may require user interaction)
+            // Unmute after entrance sequence completes (autoplay is now enabled with muted attribute)
             setTimeout(() => {
-                audioPlayer.play().catch(() => {
-                    // Autoplay was blocked, user needs to click play
-                    showToast('🎵 Click play to start the music');
-                });
+                audioPlayer.muted = false;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('active');
+                showToast('🎵 Now playing: VITAA & SLIMANE');
             }, 4500);
             
             // Song selection
@@ -1576,14 +1576,6 @@ function fadeIn(){
                     muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
                     muteBtn.classList.add('active');
                 }
-            });
-            
-            // Update play button when song ends
-            audioPlayer.addEventListener('ended', () => {
-                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                playPauseBtn.classList.remove('active');
-                audioPlayer.currentTime = 0;
-                audioPlayer.play();
             });
         }
 
