@@ -627,6 +627,75 @@
             font-family: 'Playfair Display', serif;
         }
 
+
+
+                    .design-credit {
+        text-align: center;
+        padding: 30px 20px;
+        margin: 60px auto 40px;
+        max-width: 600px;
+        position: relative;
+    }
+    
+    .credit-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        color: var(--dark);
+        opacity: 0.85;
+        margin: 0 20px;
+        font-style: italic;
+    }
+    
+    .author-name {
+        font-family: 'Great Vibes', cursive;
+        font-size: 2rem;
+        color: var(--pink-deep);
+        font-weight: normal;
+        position: relative;
+        display: inline-block;
+        padding: 0 5px;
+    }
+    
+    .author-name::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--orange-medium), transparent);
+    }
+    
+    .heart-icon {
+        animation: heartbeat 1.5s infinite;
+        display: inline-block;
+        margin: 0 5px;
+    }
+    
+    .credit-line {
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--pink-medium), var(--orange-medium), transparent);
+        margin: 15px 0;
+        position: relative;
+    }
+    
+    .credit-line::before,
+    .credit-line::after {
+        content: '✦';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--pink-deep);
+        font-size: 1.2rem;
+    }
+    
+    .credit-line::before {
+        left: -10px;
+    }
+    
+    .credit-line::after {
+        right: -10px;
+    }
         /* Floating Elements */
         .floating-heart {
             position: absolute;
@@ -1131,8 +1200,7 @@
                     A keepsake of admiration and gentle curiosity, <br>
                     © 2026 – Your New Year's Gift, from someone who notices you.  
                     <br><br>
-                    <small style="font-size: 0.9rem; opacity: 0.8;">Designed & Created by <strong>Aime Programmer</strong></small>
-                </div>
+                  
                 
                 <button class="enter-btn" onclick="createFinalCelebration()" 
                         style="margin-top: 60px; font-size: 1.8rem;">
@@ -1141,7 +1209,16 @@
             </div>
         </section>
     </div>
-
+         <div class="design-credit">
+         <div class="credit-line"></div>
+             <p class="credit-text">
+           Designed & Created with 
+             <span class="heart-icon">💖</span> 
+               by 
+        <span class="author-name">Aime Programmer</span>
+         </p>
+         <div class="credit-line"></div>
+        </div>
     <!-- Container for floating elements -->
     <div id="floatingContainer"></div>
 
