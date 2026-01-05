@@ -1127,9 +1127,10 @@
                 </div>
                 
                 <div class="letter-signature">
-                    With quiet admiration and sincere affection,<br>
-                    For Sandrine - a woman worth noticing<br>
-                    © 2026 - A digital keepsake of quiet feelings
+                    For Sandrine — someone whose smile quietly steals attention, <br> 
+                    A keepsake of admiration and gentle curiosity, <br>
+                    © 2026 – Your New Year's Gift, from someone who notices you.  
+
                 </div>
                 
                 <button class="enter-btn" onclick="createFinalCelebration()" 
@@ -1534,18 +1535,37 @@ function fadeIn(){
             const muteBtn = document.getElementById('muteBtn');
             const songSelect = document.getElementById('songSelect');
             
-            // Unmute after entrance sequence completes (autoplay is now enabled with muted attribute)
-            setTimeout(() => {
-                audioPlayer.muted = false;
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playPauseBtn.classList.add('active');
-                showToast('🎵 Now playing: VITAA & SLIMANE');
-            }, 4500);
+            // Attempt to unmute and play immediately
+            audioPlayer.muted = true;
+            
+            // Start playing the audio
+            const playPromise = audioPlayer.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Unmute after entrance sequence completes
+                    setTimeout(() => {
+                        audioPlayer.muted = false;
+                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                        playPauseBtn.classList.add('active');
+                        showToast('🎵 Now playing: VITAA & SLIMANE');
+                    }, 4500);
+                }).catch(() => {
+                    // If autoplay fails, try after user interaction
+                    document.addEventListener('click', () => {
+                        audioPlayer.muted = false;
+                        audioPlayer.play();
+                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                        playPauseBtn.classList.add('active');
+                    }, { once: true });
+                });
+            }
             
             // Song selection
             songSelect.addEventListener('change', (e) => {
                 audioPlayer.src = e.target.value;
                 audioPlayer.currentTime = 0;
+                audioPlayer.muted = false;
                 audioPlayer.play();
                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 playPauseBtn.classList.add('active');
