@@ -1,0 +1,19 @@
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules (if you add npm packages later)
+node_modules/
+package-lock.json
+
+# Environment files
+.env
+.env.local
