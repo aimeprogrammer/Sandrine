@@ -1242,7 +1242,7 @@
     
     <!-- Music Controls -->
     <div class="music-controls">
-        <select class="song-select" id="songSelect" size="1">
+        <select class="song-select" id="songSelect">
             <!-- Options will be populated by JavaScript -->
         </select>
         <button class="music-btn" id="playPauseBtn" title="Play/Pause">
@@ -1619,7 +1619,7 @@ function fadeIn(){
             
             // All available songs in the music folder
             const allSongs = [
-                { path: 'music/Despacito - Facundo Pisoli _ Luis Fonsi _ Sax - Facundo Pisoli.mp3', name: '🎺 Despacito' },
+                { path: 'music/%23Despacito - Facundo Pisoli _ Luis Fonsi _ Sax - Facundo Pisoli.mp3', name: '🎺 Despacito' },
                 { path: 'music/Baby, I Want You and Only You 💖 (New Lyrics) – English Love Song 2025 - Lyric Vibes.mp3', name: '💕 Baby, I Want You' },
                 { path: 'music/beyonce-love.mp3', name: '❤️ Beyoncé Love' },
                 { path: 'music/Calum Scott - You Are The Reason (Lyrics) - Unique Sound.mp3', name: '✨ You Are The Reason' },
@@ -1644,9 +1644,6 @@ function fadeIn(){
                 }
                 songSelect.appendChild(option);
             });
-            
-            // Set size to show all songs (with max 12 visible at once)
-            songSelect.size = Math.min(allSongs.length, 12);
             
             console.log('✅ Music controls loaded with ' + allSongs.length + ' songs');
             
