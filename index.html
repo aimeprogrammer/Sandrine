@@ -1237,9 +1237,7 @@
     <!-- Music Controls -->
     <div class="music-controls">
         <select class="song-select" id="songSelect">
-            <option value="music/piano-vitaa-slimane.mp3">🎹 VITAA & SLIMANE</option>
-            <option value="music/beyonce-love.mp3">❤️ Beyoncé Love</option>
-            <option value="music/soft-romantic.mp3">🌙 Soft Romantic</option>
+            <!-- Options will be populated by JavaScript -->
         </select>
         <button class="music-btn" id="playPauseBtn" title="Play/Pause">
             <i class="fas fa-play"></i>
@@ -1612,6 +1610,34 @@ function fadeIn(){
             const playPauseBtn = document.getElementById('playPauseBtn');
             const muteBtn = document.getElementById('muteBtn');
             const songSelect = document.getElementById('songSelect');
+            
+            // All available songs in the music folder
+            const allSongs = [
+                { path: 'music/Despacito - Facundo Pisoli _ Luis Fonsi _ Sax - Facundo Pisoli.mp3', name: '🎺 Despacito' },
+                { path: 'music/Baby, I Want You and Only You 💖 (New Lyrics) – English Love Song 2025 - Lyric Vibes.mp3', name: '💕 Baby, I Want You' },
+                { path: 'music/beyonce-love.mp3', name: '❤️ Beyoncé Love' },
+                { path: 'music/Calum Scott - You Are The Reason (Lyrics) - Unique Sound.mp3', name: '✨ You Are The Reason' },
+                { path: 'music/DADJU & TAYC -  I love you (paroles) - Realstory 🌍.mp3', name: '🌍 I Love You' },
+                { path: 'music/John Legend - All of Me (Lyrics) - 7clouds.mp3', name: '🎤 All of Me' },
+                { path: 'music/JUSTIN BIEBER - Love Yourself Lyrics - Salamonie.mp3', name: '💪 Love Yourself' },
+                { path: 'music/Kal Ho Na Ho  Piano Cover  Sonu Nigam  Aakash Desai - Aakash Desai.mp3', name: '🎹 Kal Ho Na Ho' },
+                { path: 'music/kuch kuch hota hai hindi piano - piano cover pawandeep Singh - PAWANDEEP SINGH.mp3', name: '🎼 Kuch Kuch Hota Hai' },
+                { path: 'music/piano-vitaa-slimane.mp3', name: '🎹 VITAA & SLIMANE' },
+                { path: 'music/Pink Sweat - At My Worst  Lirik Terjemahan - Indolirik.mp3', name: '💗 At My Worst' },
+                { path: 'music/soft-romantic.mp3', name: '🌙 Soft Romantic' }
+            ];
+            
+            // Populate the select dropdown
+            songSelect.innerHTML = '';
+            allSongs.forEach((song, index) => {
+                const option = document.createElement('option');
+                option.value = song.path;
+                option.textContent = song.name;
+                if (index === 0) {
+                    option.selected = true;
+                }
+                songSelect.appendChild(option);
+            });
             
             // Attempt to unmute and play immediately
             audioPlayer.muted = true;
