@@ -122,8 +122,12 @@
             font-family: 'Poppins', sans-serif;
             flex: 1;
             min-width: 140px;
-            max-height: 300px;
-            overflow-y: auto;
+        }
+        
+        .song-select option {
+            padding: 8px;
+            background: white;
+            color: var(--dark);
         }
 
         .song-select:hover {
@@ -1238,7 +1242,7 @@
     
     <!-- Music Controls -->
     <div class="music-controls">
-        <select class="song-select" id="songSelect">
+        <select class="song-select" id="songSelect" size="1">
             <!-- Options will be populated by JavaScript -->
         </select>
         <button class="music-btn" id="playPauseBtn" title="Play/Pause">
@@ -1640,6 +1644,9 @@ function fadeIn(){
                 }
                 songSelect.appendChild(option);
             });
+            
+            // Set size to show all songs (with max 12 visible at once)
+            songSelect.size = Math.min(allSongs.length, 12);
             
             console.log('✅ Music controls loaded with ' + allSongs.length + ' songs');
             
