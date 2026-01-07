@@ -2323,6 +2323,26 @@ function fadeIn(){
                 { path: 'music/soft-romantic.mp3', name: '🌙 Soft Romantic' }
             ];
             
+            // Playlist state
+            let currentPlaylistIndex = 0;
+            let playlistOrder = [];
+            let playlistMode = 'sequential'; // 'sequential' or 'random'
+            let isPlaylistMode = true;
+            
+            // Initialize playlist in random order (shuffled) starting with Baby, I Want You (index 1)
+            function initPlaylist() {
+                // Create array of all indices except Baby, I Want You (index 1)
+                const otherIndices = [...Array(allSongs.length).keys()].filter(i => i !== 1);
+                // Shuffle other songs
+                const shuffled = otherIndices.sort(() => Math.random() - 0.5);
+                // Put Baby, I Want You (index 1) at the beginning
+                playlistOrder = [1, ...shuffled];
+                currentPlaylistIndex = 0;
+            }
+            
+            // Initialize playlist
+            initPlaylist();
+            
             // Clear and populate the select dropdown
             songSelect.innerHTML = '';
             allSongs.forEach((song, index) => {
@@ -2335,43 +2355,64 @@ function fadeIn(){
                 songSelect.appendChild(option);
             });
             
-            console.log('✅ Music controls loaded with ' + allSongs.length + ' songs');
+            console.log('✅ Music controls loaded with ' + allSongs.length + ' songs (Playlist Mode Enabled)');
             
-            // Attempt to unmute and play immediately
-            audioPlayer.muted = true;
-            
-            // Start playing the audio
-            const playPromise = audioPlayer.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Unmute after entrance sequence completes
-                    setTimeout(() => {
-                        audioPlayer.muted = false;
-                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                        playPauseBtn.classList.add('active');
-                        showToast('🎵 Now playing: VITAA & SLIMANE');
-                    }, 4500);
-                }).catch(() => {
-                    // If autoplay fails, try after user interaction
-                    document.addEventListener('click', () => {
-                        audioPlayer.muted = false;
-                        audioPlayer.play();
-                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                        playPauseBtn.classList.add('active');
-                    }, { once: true });
-                });
+            // Play next song in playlist
+            function playNextInPlaylist() {
+                if (currentPlaylistIndex < playlistOrder.length) {
+                    const songIndex = playlistOrder[currentPlaylistIndex];
+                    const nextSong = allSongs[songIndex];
+                    audioPlayer.src = nextSong.path;
+                    audioPlayer.muted = false;
+                    
+                    // Ensure the audio plays
+                    const playPromise = audioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Play error:", error);
+                        });
+                    }
+                    
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playPauseBtn.classList.add('active');
+                    showToast('🎵 ' + nextSong.name);
+                    
+                    // Update dropdown to reflect current song
+                    songSelect.value = nextSong.path;
+                    
+                    currentPlaylistIndex++;
+                } else {
+                    // Playlist finished, reinitialize
+                    showToast('✨ Playlist complete! Restarting... 🎵');
+                    initPlaylist();
+                    playNextInPlaylist();
+                }
             }
             
-            // Song selection
+            // When a song ends, play the next one
+            audioPlayer.addEventListener('ended', () => {
+                if (isPlaylistMode) {
+                    playNextInPlaylist();
+                } else {
+                    // Manual mode - stop at end
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playPauseBtn.classList.remove('active');
+                }
+            });
+            
+            // Start playing the first song in playlist immediately
+            playNextInPlaylist();
+            
+            // Song selection - switch to manual mode
             songSelect.addEventListener('change', (e) => {
+                isPlaylistMode = false;
                 audioPlayer.src = e.target.value;
                 audioPlayer.currentTime = 0;
                 audioPlayer.muted = false;
                 audioPlayer.play();
                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 playPauseBtn.classList.add('active');
-                showToast('🎵 ' + e.target.options[e.target.selectedIndex].text);
+                showToast('🎵 ' + e.target.options[e.target.selectedIndex].text + ' (Manual Mode)');
             });
             
             // Play/Pause button
