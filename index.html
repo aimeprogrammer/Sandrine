@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Sandrine</title>
-   <link rel="icon" type="image/jpeg" href="logo.JPG">
+    <link rel="icon" type="image/jpeg" href="logo.JPG">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Poppins:wght@200;300;400;500&family=Playfair+Display:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -106,38 +106,63 @@
             margin: 0 5px;
         }
 
-        #audioPlayer {
-            display: none;
-        }
-
-        .song-select {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid var(--pink-medium);
-            padding: 6px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            color: var(--dark);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            flex: 1;
-            min-width: 140px;
-        }
-        
-        .song-select option {
-            padding: 8px;
-            background: white;
-            color: var(--dark);
-        }
-
-        .song-select:hover {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: var(--pink-deep);
-        }
-
-        .song-select:focus {
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
             outline: none;
-            box-shadow: 0 0 10px rgba(255, 92, 141, 0.3);
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--pink-deep);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--pink-deep);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Music Overlay */
+        #musicOverlay {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff5c8d, #ff8fab);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 10px 40px rgba(255, 92, 141, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 10px 40px rgba(255, 92, 141, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 50px rgba(255, 92, 141, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 40px rgba(255, 92, 141, 0.3); }
         }
 
         /* Loading Sequence */
@@ -633,75 +658,73 @@
             font-family: 'Playfair Display', serif;
         }
 
-
-
-                    .design-credit {
-        text-align: center;
-        padding: 30px 20px;
-        margin: 60px auto 40px;
-        max-width: 600px;
-        position: relative;
-    }
-    
-    .credit-text {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.4rem;
-        color: var(--dark);
-        opacity: 0.85;
-        margin: 0 20px;
-        font-style: italic;
-    }
-    
-    .author-name {
-        font-family: 'Great Vibes', cursive;
-        font-size: 2rem;
-        color: var(--pink-deep);
-        font-weight: normal;
-        position: relative;
-        display: inline-block;
-        padding: 0 5px;
-    }
-    
-    .author-name::before {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(to right, transparent, var(--orange-medium), transparent);
-    }
-    
-    .heart-icon {
-        animation: heartbeat 1.5s infinite;
-        display: inline-block;
-        margin: 0 5px;
-    }
-    
-    .credit-line {
-        height: 1px;
-        background: linear-gradient(to right, transparent, var(--pink-medium), var(--orange-medium), transparent);
-        margin: 15px 0;
-        position: relative;
-    }
-    
-    .credit-line::before,
-    .credit-line::after {
-        content: '✦';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--pink-deep);
-        font-size: 1.2rem;
-    }
-    
-    .credit-line::before {
-        left: -10px;
-    }
-    
-    .credit-line::after {
-        right: -10px;
-    }
+        .design-credit {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 60px auto 40px;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .credit-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            opacity: 0.85;
+            margin: 0 20px;
+            font-style: italic;
+        }
+        
+        .author-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--pink-deep);
+            font-weight: normal;
+            position: relative;
+            display: inline-block;
+            padding: 0 5px;
+        }
+        
+        .author-name::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--orange-medium), transparent);
+        }
+        
+        .heart-icon {
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        .credit-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--pink-medium), var(--orange-medium), transparent);
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .credit-line::before,
+        .credit-line::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink-deep);
+            font-size: 1.2rem;
+        }
+        
+        .credit-line::before {
+            left: -10px;
+        }
+        
+        .credit-line::after {
+            right: -10px;
+        }
         /* Floating Elements */
         .floating-heart {
             position: absolute;
@@ -1406,6 +1429,24 @@
             .letter-content {
                 font-size: 2rem;
             }
+            
+            .music-controls {
+                bottom: 10px;
+                right: 10px;
+                max-width: 280px;
+                padding: 12px 15px;
+            }
+            
+            .volume-slider {
+                width: 60px;
+            }
+            
+            #musicOverlay {
+                bottom: 10px;
+                right: 10px;
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1424,32 +1465,32 @@
             .love-section {
                 padding: 70px 20px;
             }
+            
+            .music-controls {
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                right: auto;
+                width: 95%;
+                max-width: 95%;
+                justify-content: center;
+            }
+            
+            #musicOverlay {
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                right: auto;
+                width: 90%;
+                text-align: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-   <!-- Audio elements for background music -->
-<audio id="romanticMusic" loop preload="auto">
-    <!-- You need actual MP3 files or direct audio links -->
-    <!-- Example with placeholder sources - REPLACE THESE WITH ACTUAL AUDIO FILES -->
-    <source src="music/piano-vitaa-slimane.mp3" type="audio/mpeg">
-    <source src="music/beyonce-love.mp3" type="audio/mpeg">
-    <source src="music/soft-romantic.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
-<button id="playMusicBtn" class="music-btn">🎧 Play the mood</button>
-
-<!-- Separate sections with data-music attributes -->
-<section data-music="music/piano-vitaa-slimane.mp3">
-    <!-- Section content -->
-</section>
-<section data-music="music/beyonce-love.mp3">
-    <!-- Section content -->
-</section>
-<section data-music="music/soft-romantic.mp3">
-    <!-- Section content -->
-</section>
     <!-- Loading Sequence -->
     <div class="loading-sequence" id="loadingSequence">
         <div class="pulse-heart">💖</div>
@@ -1917,26 +1958,12 @@
     <!-- Toast Container -->
     <div class="love-toast" id="loveToast"></div>
 
-    <!-- Audio for subtle background -->
-    <audio id="backgroundAmbience" loop>
-        <!-- Add your soft ambient music here -->
-        <!-- <source src="soft-ambient.mp3" type="audio/mpeg"> -->
-    </audio>
-
-    <!-- Audio Player for VITAA & SLIMANE -->
-    <audio id="audioPlayer" src="music/piano-vitaa-slimane.mp3" autoplay muted loop></audio>
+    <!-- Audio Player -->
+    <audio id="audioPlayer"></audio>
     
     <!-- Music Controls -->
     <div class="music-controls">
-        <select class="song-select" id="songSelect">
-            <!-- Options will be populated by JavaScript -->
-        </select>
-        <button class="music-btn" id="playPauseBtn" title="Play/Pause">
-            <i class="fas fa-play"></i>
-        </button>
-        <button class="music-btn" id="muteBtn" title="Mute/Unmute">
-            <i class="fas fa-volume-up"></i>
-        </button>
+        <!-- Volume slider, song select, and buttons will be added by JavaScript -->
     </div>
 
     <script>
@@ -1958,7 +1985,7 @@
             setupNavigation();
             setupInteractions();
             
-            // Setup music controls
+            // Setup music controls - This will show "Click to start music" button
             setupMusicControls();
             
             // Setup interactive features
@@ -2078,82 +2105,8 @@
                     showToast(`This feeling grows quietly for you... 💕`);
                 });
             });
-                const audio = document.getElementById("romanticMusic");
-const playBtn = document.getElementById("playMusicBtn");
-let currentSong = "";
-let userStarted = false;
-
-// Initial setup - hide play button if autoplay is blocked
-audio.volume = 0.5;
-
-playBtn.addEventListener("click", () => {
-    userStarted = true;
-    playBtn.innerHTML = "🎧 Playing...";
-    playBtn.disabled = true;
-    
-    // Start with first section's music
-    const firstSection = document.querySelector("section[data-music]");
-    if (firstSection && firstSection.dataset.music) {
-        switchSong(firstSection.dataset.music);
-    }
-});
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && userStarted) {
-            const song = entry.target.dataset.music;
-            if (song && song !== currentSong) {
-                switchSong(song);
-            }
-        }
-    });
-}, { threshold: 0.5 });
-
-// Observe all sections with data-music attribute
-document.querySelectorAll("section[data-music]").forEach(sec => observer.observe(sec));
-
-function switchSong(src){
-    if (src === currentSong) return;
-    
-    currentSong = src;
-    fadeOut(() => {
-        audio.src = src;
-        audio.play().catch(e => {
-            console.log("Auto-play prevented:", e);
-            playBtn.innerHTML = "🎧 Click to play";
-            playBtn.disabled = false;
-        });
-        fadeIn();
-    });
-}
-
-function fadeOut(cb){
-    let v = audio.volume;
-    const out = setInterval(() => {
-        if (v > 0.05) {
-            v -= 0.05;
-            audio.volume = v;
-        } else {
-            clearInterval(out);
-            audio.pause();
-            cb();
-        }
-    }, 100);
-}
-
-function fadeIn(){
-    audio.volume = 0;
-    let v = 0;
-    const inn = setInterval(() => {
-        if (v < 0.5) { // Max volume 0.5
-            v += 0.05;
-            audio.volume = v;
-        } else {
-            clearInterval(inn);
-        }
-    }, 100);
-}
-      // Message cards interaction
+            
+            // Message cards interaction
             const messageCards = document.querySelectorAll('.message-card');
             messageCards.forEach(card => {
                 card.addEventListener('click', function() {
@@ -2300,17 +2253,16 @@ function fadeIn(){
             observer.observe(secretSection);
         }
 
-        // Music Controls Setup
+        // ==================== MUSIC CONTROLS ====================
         function setupMusicControls() {
             const audioPlayer = document.getElementById('audioPlayer');
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const muteBtn = document.getElementById('muteBtn');
-            const songSelect = document.getElementById('songSelect');
+            const musicControls = document.querySelector('.music-controls');
             
-            // All available songs in the music folder
+            // All available songs
             const allSongs = [
-                { path: 'music/%23Despacito - Facundo Pisoli _ Luis Fonsi _ Sax - Facundo Pisoli.mp3', name: '🎺 Despacito' },
                 { path: 'music/Baby, I Want You and Only You 💖 (New Lyrics) – English Love Song 2025 - Lyric Vibes.mp3', name: '💕 Baby, I Want You' },
+                { path: 'music/piano-vitaa-slimane.mp3', name: '🎹 VITAA & SLIMANE' },
+                { path: 'music/%23Despacito - Facundo Pisoli _ Luis Fonsi _ Sax - Facundo Pisoli.mp3', name: '🎺 Despacito' },
                 { path: 'music/beyonce-love.mp3', name: '❤️ Beyoncé Love' },
                 { path: 'music/Calum Scott - You Are The Reason (Lyrics) - Unique Sound.mp3', name: '✨ You Are The Reason' },
                 { path: 'music/DADJU & TAYC -  I love you (paroles) - Realstory 🌍.mp3', name: '🌍 I Love You' },
@@ -2318,129 +2270,296 @@ function fadeIn(){
                 { path: 'music/JUSTIN BIEBER - Love Yourself Lyrics - Salamonie.mp3', name: '💪 Love Yourself' },
                 { path: 'music/Kal Ho Na Ho  Piano Cover  Sonu Nigam  Aakash Desai - Aakash Desai.mp3', name: '🎹 Kal Ho Na Ho' },
                 { path: 'music/kuch kuch hota hai hindi piano - piano cover pawandeep Singh - PAWANDEEP SINGH.mp3', name: '🎼 Kuch Kuch Hota Hai' },
-                { path: 'music/piano-vitaa-slimane.mp3', name: '🎹 VITAA & SLIMANE' },
                 { path: 'music/Pink Sweat - At My Worst  Lirik Terjemahan - Indolirik.mp3', name: '💗 At My Worst' },
                 { path: 'music/soft-romantic.mp3', name: '🌙 Soft Romantic' }
             ];
             
             // Playlist state
-            let currentPlaylistIndex = 0;
-            let playlistOrder = [];
-            let playlistMode = 'sequential'; // 'sequential' or 'random'
-            let isPlaylistMode = true;
-            
-            // Initialize playlist in random order (shuffled) starting with Baby, I Want You (index 1)
-            function initPlaylist() {
-                // Create array of all indices except Baby, I Want You (index 1)
-                const otherIndices = [...Array(allSongs.length).keys()].filter(i => i !== 1);
-                // Shuffle other songs
-                const shuffled = otherIndices.sort(() => Math.random() - 0.5);
-                // Put Baby, I Want You (index 1) at the beginning
-                playlistOrder = [1, ...shuffled];
-                currentPlaylistIndex = 0;
-            }
+            let currentSongIndex = 0;
+            let playlist = [...allSongs];
+            let isPlaying = false;
+            let isShuffled = false;
+            let userHasInteracted = false;
             
             // Initialize playlist
-            initPlaylist();
+            function initializePlaylist() {
+                currentSongIndex = 0;
+                console.log('🎵 Playlist initialized');
+            }
             
-            // Clear and populate the select dropdown
-            songSelect.innerHTML = '';
+            initializePlaylist();
+            
+            // Clear music controls and rebuild
+            musicControls.innerHTML = '';
+            
+            // Create volume slider
+            const volumeSlider = document.createElement('input');
+            volumeSlider.type = 'range';
+            volumeSlider.min = '0';
+            volumeSlider.max = '100';
+            volumeSlider.value = '70';
+            volumeSlider.className = 'volume-slider';
+            volumeSlider.style.width = '80px';
+            volumeSlider.title = 'Volume';
+            
+            // Create song select
+            const songSelect = document.createElement('select');
+            songSelect.className = 'song-select';
+            songSelect.id = 'songSelect';
+            songSelect.style.minWidth = '140px';
+            
+            // Populate song select
             allSongs.forEach((song, index) => {
                 const option = document.createElement('option');
                 option.value = song.path;
                 option.textContent = song.name;
-                if (index === 0) {
-                    option.selected = true;
-                }
+                if (index === 0) option.selected = true;
                 songSelect.appendChild(option);
             });
             
-            console.log('✅ Music controls loaded with ' + allSongs.length + ' songs (Playlist Mode Enabled)');
+            // Create Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'music-btn';
+            prevBtn.innerHTML = '<i class="fas fa-backward"></i>';
+            prevBtn.title = 'Previous Song';
             
-            // Play next song in playlist
-            function playNextInPlaylist() {
-                if (currentPlaylistIndex < playlistOrder.length) {
-                    const songIndex = playlistOrder[currentPlaylistIndex];
-                    const nextSong = allSongs[songIndex];
-                    audioPlayer.src = nextSong.path;
+            // Create Play/Pause button - Start with play button
+            const playPauseBtn = document.createElement('button');
+            playPauseBtn.className = 'music-btn';
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playPauseBtn.title = 'Play/Pause';
+            playPauseBtn.id = 'mainPlayBtn';
+            
+            // Create Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'music-btn';
+            nextBtn.innerHTML = '<i class="fas fa-forward"></i>';
+            nextBtn.title = 'Next Song';
+            
+            // Create Shuffle button
+            const shuffleBtn = document.createElement('button');
+            shuffleBtn.className = 'music-btn';
+            shuffleBtn.innerHTML = '<i class="fas fa-random"></i>';
+            shuffleBtn.title = 'Shuffle Playlist';
+            
+            // Create Mute button
+            const muteBtn = document.createElement('button');
+            muteBtn.className = 'music-btn';
+            muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            muteBtn.title = 'Mute/Unmute';
+            
+            // Add all elements to music controls
+            musicControls.appendChild(volumeSlider);
+            musicControls.appendChild(songSelect);
+            musicControls.appendChild(prevBtn);
+            musicControls.appendChild(shuffleBtn);
+            musicControls.appendChild(playPauseBtn);
+            musicControls.appendChild(nextBtn);
+            musicControls.appendChild(muteBtn);
+            
+            // Play a specific song
+            function playSong(index) {
+                if (index >= 0 && index < playlist.length) {
+                    currentSongIndex = index;
+                    const song = playlist[currentSongIndex];
+                    
+                    // Update audio source
+                    audioPlayer.src = song.path;
+                    audioPlayer.currentTime = 0;
                     audioPlayer.muted = false;
                     
-                    // Ensure the audio plays
-                    const playPromise = audioPlayer.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.log("Play error:", error);
-                        });
-                    }
-                    
+                    // Update UI
+                    songSelect.value = song.path;
                     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                     playPauseBtn.classList.add('active');
-                    showToast('🎵 ' + nextSong.name);
                     
-                    // Update dropdown to reflect current song
-                    songSelect.value = nextSong.path;
+                    // Show notification
+                    showToast('🎵 Now Playing: ' + song.name);
+                    console.log('🎶 Playing: ' + song.name);
                     
-                    currentPlaylistIndex++;
+                    // Try to play
+                    const playPromise = audioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            isPlaying = true;
+                        }).catch(error => {
+                            console.log("Play error:", error);
+                            isPlaying = false;
+                            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                            playPauseBtn.classList.remove('active');
+                        });
+                    }
+                }
+            }
+            
+            // Play next song
+            function playNextSong() {
+                let nextIndex = currentSongIndex + 1;
+                if (nextIndex >= playlist.length) {
+                    nextIndex = 0; // Loop back to start
+                }
+                playSong(nextIndex);
+            }
+            
+            // Play previous song
+            function playPreviousSong() {
+                let prevIndex = currentSongIndex - 1;
+                if (prevIndex < 0) {
+                    prevIndex = playlist.length - 1; // Loop to end
+                }
+                playSong(prevIndex);
+            }
+            
+            // Shuffle playlist
+            function shufflePlaylist() {
+                if (isShuffled) {
+                    // Unshuffle: restore original order with Baby song first
+                    playlist = [...allSongs];
+                    isShuffled = false;
+                    shuffleBtn.classList.remove('active');
+                    showToast('🔄 Playlist restored to original order');
                 } else {
-                    // Playlist finished, reinitialize
-                    showToast('✨ Playlist complete! Restarting... 🎵');
-                    initPlaylist();
-                    playNextInPlaylist();
+                    // Shuffle but keep current song playing
+                    const currentSong = playlist[currentSongIndex];
+                    const otherSongs = playlist.filter((_, index) => index !== currentSongIndex);
+                    
+                    // Fisher-Yates shuffle
+                    for (let i = otherSongs.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [otherSongs[i], otherSongs[j]] = [otherSongs[j], otherSongs[i]];
+                    }
+                    
+                    // Put current song at its position
+                    playlist = [...otherSongs.slice(0, currentSongIndex), currentSong, ...otherSongs.slice(currentSongIndex)];
+                    isShuffled = true;
+                    shuffleBtn.classList.add('active');
+                    showToast('🔀 Playlist shuffled!');
                 }
             }
             
             // When a song ends, play the next one
             audioPlayer.addEventListener('ended', () => {
-                if (isPlaylistMode) {
-                    playNextInPlaylist();
-                } else {
-                    // Manual mode - stop at end
-                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    playPauseBtn.classList.remove('active');
+                console.log('⏭️ Song ended, playing next...');
+                playNextSong();
+            });
+            
+            // Event listener for first user interaction
+            function handleFirstInteraction() {
+                if (!userHasInteracted) {
+                    userHasInteracted = true;
+                    console.log('🎵 First user interaction detected');
+                    
+                    // Start playing "Baby, I Want You"
+                    playSong(0);
+                    showToast('💕 Starting with: Baby, I Want You');
+                    
+                    // Remove overlay
+                    const overlay = document.getElementById('musicOverlay');
+                    if (overlay) {
+                        overlay.style.opacity = '0';
+                        overlay.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            overlay.style.display = 'none';
+                        }, 300);
+                    }
                 }
-            });
+            }
             
-            // Start playing the first song in playlist immediately
-            playNextInPlaylist();
+            // Add click listeners for first interaction
+            document.getElementById('enterBtn').addEventListener('click', handleFirstInteraction);
             
-            // Song selection - switch to manual mode
-            songSelect.addEventListener('change', (e) => {
-                isPlaylistMode = false;
-                audioPlayer.src = e.target.value;
-                audioPlayer.currentTime = 0;
-                audioPlayer.muted = false;
-                audioPlayer.play();
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playPauseBtn.classList.add('active');
-                showToast('🎵 ' + e.target.options[e.target.selectedIndex].text + ' (Manual Mode)');
-            });
-            
-            // Play/Pause button
             playPauseBtn.addEventListener('click', () => {
+                if (!userHasInteracted) {
+                    handleFirstInteraction();
+                    return;
+                }
+                
                 if (audioPlayer.paused) {
                     audioPlayer.play();
                     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                     playPauseBtn.classList.add('active');
+                    isPlaying = true;
                 } else {
                     audioPlayer.pause();
                     playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                     playPauseBtn.classList.remove('active');
+                    isPlaying = false;
                 }
             });
             
-            // Mute button
+            // Also allow any click on the website to start music
+            document.addEventListener('click', function firstClickHandler(e) {
+                if (!userHasInteracted) {
+                    handleFirstInteraction();
+                }
+                // Remove this listener after first interaction
+                document.removeEventListener('click', firstClickHandler);
+            });
+            
+            // Other event listeners
+            prevBtn.addEventListener('click', () => {
+                if (!userHasInteracted) handleFirstInteraction();
+                else playPreviousSong();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (!userHasInteracted) handleFirstInteraction();
+                else playNextSong();
+            });
+            
+            shuffleBtn.addEventListener('click', () => {
+                if (!userHasInteracted) handleFirstInteraction();
+                else shufflePlaylist();
+            });
+            
+            songSelect.addEventListener('change', (e) => {
+                if (!userHasInteracted) handleFirstInteraction();
+                else {
+                    const selectedPath = e.target.value;
+                    const selectedIndex = playlist.findIndex(song => song.path === selectedPath);
+                    if (selectedIndex !== -1) {
+                        playSong(selectedIndex);
+                    }
+                }
+            });
+            
             muteBtn.addEventListener('click', () => {
-                if (audioPlayer.muted) {
-                    audioPlayer.muted = false;
-                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    muteBtn.classList.remove('active');
-                } else {
-                    audioPlayer.muted = true;
-                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                    muteBtn.classList.add('active');
+                if (!userHasInteracted) handleFirstInteraction();
+                else {
+                    audioPlayer.muted = !audioPlayer.muted;
+                    muteBtn.innerHTML = audioPlayer.muted ? 
+                        '<i class="fas fa-volume-mute"></i>' : 
+                        '<i class="fas fa-volume-up"></i>';
+                    muteBtn.classList.toggle('active', audioPlayer.muted);
+                }
+            });
+            
+            volumeSlider.addEventListener('input', (e) => {
+                audioPlayer.volume = e.target.value / 100;
+            });
+            
+            // Initialize volume
+            audioPlayer.volume = 0.7;
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (!userHasInteracted && (e.code === 'Space' || e.code === 'Enter')) {
+                    handleFirstInteraction();
+                    e.preventDefault();
+                } else if (e.code === 'Space') {
+                    e.preventDefault();
+                    playPauseBtn.click();
+                } else if (e.code === 'ArrowRight') {
+                    if (!userHasInteracted) handleFirstInteraction();
+                    else playNextSong();
+                } else if (e.code === 'ArrowLeft') {
+                    if (!userHasInteracted) handleFirstInteraction();
+                    else playPreviousSong();
                 }
             });
         }
+
+        // ==================== OTHER FEATURES ====================
 
         // Romantic Button Setup
         function setupRomanticButton() {
@@ -2546,8 +2665,15 @@ function fadeIn(){
             const randomSong = allSongs[Math.floor(Math.random() * allSongs.length)];
             
             audioPlayer.src = randomSong;
-            audioPlayer.muted = false;
+            audioPlayer.currentTime = 0;
             audioPlayer.play();
+            
+            // Update play button
+            const playPauseBtn = document.querySelector('#mainPlayBtn');
+            if (playPauseBtn) {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('active');
+            }
         }
 
         // Generate Photo Gallery
@@ -2779,8 +2905,6 @@ function fadeIn(){
                 setupRandomMessages();
             }, 100);
         });
-
-        
     </script>
 </body>
 </html>
